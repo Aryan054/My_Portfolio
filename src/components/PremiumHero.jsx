@@ -75,7 +75,7 @@ export default function PremiumHero() {
               transition={{ delay: 0.3, duration: 0.6 }}
             >
               <div>
-                <div className="font-bold text-ink_text text-lg">3+</div>
+                <div className="font-bold text-ink_text text-lg">4+</div>
                 <div className="text-text-soft text-sm">Production Projects</div>
               </div>
               <div>
