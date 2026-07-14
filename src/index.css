@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  @apply bg-paper text-ink_text font-body antialiased;
+}
+
+::selection {
+  @apply bg-accent text-white;
+}
+
+:focus-visible {
+  outline: 2px solid theme('colors.accent2');
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.chip {
+  @apply font-mono text-xs text-ink_text bg-paper-soft border border-line px-2.5 py-1 rounded-md;
+}
+
+.eyebrow::before {
+  content: '//';
+  @apply text-muted mr-2;
+}
+
+.direct-link {
+  @apply font-mono text-[12.5px] no-underline text-ink_text border border-line px-3 py-2 rounded-lg inline-flex gap-1.5 items-center transition-colors;
+}
+
+.direct-link:hover {
+  @apply border-accent text-accent;
+}
