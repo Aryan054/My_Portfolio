@@ -18,7 +18,7 @@ export const profile = {
   portfolio: 'https://aryan054.vercel.app/',
   portfolioLabel: 'aryan054.vercel.app',
   photoUrl: '/My_picture.png',
-  resumeUrl: '/Aryan-Rathod-Resume.pdf',
+  resumeUrl: '/aryan-rathod-resume.pdf',
 }
 
 export const routes = [
