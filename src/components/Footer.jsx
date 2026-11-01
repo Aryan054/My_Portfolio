@@ -1,18 +1,87 @@
 import { useEffect, useState } from 'react'
+import { FileText, Github, Linkedin, Mail, ArrowUp } from 'lucide-react'
+import { profile } from '../data/portfolio'
 
-export default function Footer() {
+export default function Footer({ onOpenResume }) {
   const [ms, setMs] = useState(12.0)
 
   useEffect(() => {
-    const id = setInterval(() => setMs(Math.random() * 8 + 8), 2500)
+    const id = setInterval(() => setMs(Math.random() * 6 + 9), 2500)
     return () => clearInterval(id)
   }, [])
 
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
-    <footer className="py-8 md:py-12">
-      <div className="max-w-[1160px] mx-auto px-6 flex flex-wrap justify-between gap-3 font-mono text-xs text-muted">
-        <span>© 2026 Aryan Rathod · Pune, Maharashtra, IN</span>
-        <span>x-response-time: {ms.toFixed(1)}ms</span>
+    <footer className="py-10 bg-ink text-muted border-t border-line-dark">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-line-dark/60">
+          <div>
+            <div className="font-bold text-white text-base tracking-tight">
+              Aryan Rathod
+            </div>
+            <p className="font-mono text-xs text-muted mt-0.5">
+              Python Full Stack Developer · Django · FastAPI · PostgreSQL · React
+            </p>
+          </div>
+
+          {/* Quick Links */}
+          <div className="flex items-center gap-4 text-xs font-mono">
+            <button
+              onClick={onOpenResume}
+              className="text-accent hover:text-white flex items-center gap-1.5 transition-colors"
+            >
+              <FileText size={13} />
+              <span>Resume PDF</span>
+            </button>
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white flex items-center gap-1 transition-colors"
+            >
+              <Github size={13} />
+              <span>GitHub</span>
+            </a>
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white flex items-center gap-1 transition-colors"
+            >
+              <Linkedin size={13} />
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href={`mailto:${profile.email}`}
+              className="hover:text-white flex items-center gap-1 transition-colors"
+            >
+              <Mail size={13} />
+              <span>Email</span>
+            </a>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-6 font-mono text-[11.5px]">
+          <div className="flex items-center gap-3">
+            <span>© 2026 Aryan Rathod · Pune, Maharashtra, IN</span>
+            <span className="hidden sm:inline">•</span>
+            <span className="text-emerald-400 hidden sm:inline">Immediate Availability</span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span className="text-muted/80">x-response-time: {ms.toFixed(1)}ms</span>
+            <button
+              onClick={scrollToTop}
+              className="p-1.5 rounded-lg border border-line-dark hover:border-accent text-muted hover:text-white transition-colors"
+              title="Scroll to top"
+            >
+              <ArrowUp size={13} />
+            </button>
+          </div>
+        </div>
       </div>
     </footer>
   )

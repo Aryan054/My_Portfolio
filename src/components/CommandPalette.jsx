@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useReducer, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Search, CornerDownLeft, ArrowUp, ArrowDown } from 'lucide-react'
+import { Search, CornerDownLeft, ArrowUp, ArrowDown, FileText } from 'lucide-react'
 import { commands, profile } from '../data/portfolio'
+import { downloadResume } from '../utils/downloadResume'
 
 const initialState = { query: '', selected: 0 }
 
@@ -19,7 +20,7 @@ function reducer(state, action) {
   }
 }
 
-export default function CommandPalette({ open, onClose }) {
+export default function CommandPalette({ open, onClose, onOpenResume }) {
   const [state, dispatch] = useReducer(reducer, initialState)
   const inputRef = useRef(null)
 
@@ -46,12 +47,22 @@ export default function CommandPalette({ open, onClose }) {
 
   function runCommand(cmd) {
     if (!cmd) return
-    if (cmd.id === 'email') {
+    if (cmd.id === 'resume') {
+      onClose()
+      onOpenResume?.()
+      return
+    } else if (cmd.id === 'download-resume') {
+      downloadResume()
+    } else if (cmd.id === 'email') {
       navigator.clipboard?.writeText(profile.email).catch(() => {})
     } else if (cmd.id === 'mail') {
       window.location.href = `mailto:${profile.email}`
+    } else if (cmd.id === 'call') {
+      window.location.href = `tel:${profile.phone}`
     } else if (cmd.id === 'linkedin') {
       window.open(profile.linkedin, '_blank', 'noopener')
+    } else if (cmd.id === 'github') {
+      window.open(profile.github, '_blank', 'noopener')
     } else {
       document.getElementById(cmd.id)?.scrollIntoView({ behavior: 'smooth' })
     }
@@ -79,7 +90,7 @@ export default function CommandPalette({ open, onClose }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[200] bg-ink/60 backdrop-blur-sm flex items-start justify-center pt-24 px-4"
+          className="fixed inset-0 z-[300] bg-ink/70 backdrop-blur-sm flex items-start justify-center pt-20 px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -94,16 +105,16 @@ export default function CommandPalette({ open, onClose }) {
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
             transition={{ duration: 0.15 }}
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-lg bg-ink border border-line-dark rounded-xl shadow-2xl overflow-hidden"
+            className="w-full max-w-lg bg-ink border border-line-dark rounded-2xl shadow-2xl overflow-hidden"
           >
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-line-dark">
+            <div className="flex items-center gap-3 px-4 py-3.5 border-b border-line-dark">
               <Search size={16} className="text-muted shrink-0" />
               <input
                 ref={inputRef}
                 value={state.query}
                 onChange={(e) => dispatch({ type: 'SET_QUERY', payload: e.target.value })}
                 onKeyDown={handleKeyDown}
-                placeholder="Type a command or search…"
+                placeholder="Type a command (e.g. resume, skills, contact)..."
                 className="w-full bg-transparent font-mono text-sm text-white placeholder:text-muted outline-none"
               />
               <kbd className="font-mono text-[10px] text-muted border border-line-dark rounded px-1.5 py-0.5 shrink-0">
@@ -124,7 +135,10 @@ export default function CommandPalette({ open, onClose }) {
                       i === state.selected ? 'bg-ink-soft text-white' : 'text-[#D6DCE5]'
                     }`}
                   >
-                    <span>{cmd.label}</span>
+                    <span className="flex items-center gap-2">
+                      {cmd.id.includes('resume') && <FileText size={13} className="text-accent" />}
+                      {cmd.label}
+                    </span>
                     <span className="text-muted text-[11px]">{cmd.hint}</span>
                   </button>
                 </li>

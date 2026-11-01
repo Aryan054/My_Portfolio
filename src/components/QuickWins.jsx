@@ -1,86 +1,123 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Github, Code2, Briefcase } from 'lucide-react'
-import { projects, experience } from '../data/portfolio'
+import { recruiterHighlights, profile } from '../data/portfolio'
+import { FileText, Download, CheckCircle, Sparkles } from 'lucide-react'
+import { downloadResume } from '../utils/downloadResume'
 
-// Helper to calculate total experience in months
-const calculateTotalMonths = (experiences) => {
-  let totalMonths = 0;
-  experiences.forEach(exp => {
-    const parts = exp.dates.split(/[-–]/).map(p => p.trim());
-    if (parts.length === 2) {
-      const start = new Date(parts[0]);
-      const end = parts[1].toLowerCase() === 'present' ? new Date() : new Date(parts[1]);
-      if (!isNaN(start) && !isNaN(end)) {
-        // Adding 1 to make it inclusive (e.g. Feb-Mar = 2 months)
-        const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1;
-        totalMonths += months;
-      }
-    }
-  });
-  return totalMonths;
-};
-
-export default function QuickWins() {
-  const [githubData, setGithubData] = useState('500+') // Default fallback
-  const [label, setLabel] = useState('GitHub Contributions')
-
-  // Calculate live project and experience stats
-  const liveProjectCount = projects.length;
-  const liveExperienceMonths = calculateTotalMonths(experience);
+export default function QuickWins({ onOpenResume }) {
+  const [repoCount, setRepoCount] = useState('15+')
 
   useEffect(() => {
-    // Fetch live data from GitHub API
     fetch('https://api.github.com/users/aryan054')
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.public_repos !== undefined) {
-          setGithubData(`${data.public_repos}+`)
-          setLabel('Live GitHub Repos')
+          setRepoCount(`${data.public_repos}+`)
         }
       })
-      .catch(err => console.error('Failed to fetch github data', err))
+      .catch(() => {})
   }, [])
 
-  const stats = [
-    { icon: Github, label: label, value: githubData, color: 'from-accent to-accent', isLive: true },
-    { icon: Code2, label: 'Production Projects', value: `${liveProjectCount}`, color: 'from-accent to-accent2', isLive: true },
-    { icon: Briefcase, label: 'Months Experience', value: `${liveExperienceMonths}mo`, color: 'from-accent2 to-accent', isLive: true },
-  ]
-
   return (
-    <section className="py-12 md:py-16 bg-white border-b border-line">
+    <section className="py-14 md:py-20 bg-white border-b border-line">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-6">
-          {stats.map((stat, i) => {
-            const Icon = stat.icon
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group relative"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-accent2/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative p-6 border border-line rounded-xl hover:border-accent/30 transition-all">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${stat.color} text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                    <Icon size={24} />
-                  </div>
-                  <div className="text-3xl font-bold text-ink_text mb-1 flex items-center gap-2">
-                    {stat.value}
-                    {stat.isLive && <span className="relative flex h-3 w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
-                    </span>}
-                  </div>
-                  <div className="text-text-soft font-mono text-sm">{stat.label}</div>
-                </div>
-              </motion.div>
-            )
-          })}
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <div className="inline-flex items-center gap-1.5 font-mono text-xs text-accent bg-accent-soft border border-accent/25 px-3 py-1.5 rounded-full mb-3">
+              <Sparkles size={13} />
+              <span>// Recruiter Quick Match</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-ink_text tracking-tight">
+              Why Aryan for Your Engineering Team?
+            </h2>
+            <p className="text-text-soft text-base mt-2 max-w-2xl">
+              High-impact engineering delivered across production SaaS, fintech workflows, and AI systems.
+            </p>
+          </div>
+
+          {/* Quick Resume CTA */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={onOpenResume}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-accent/40 bg-accent/5 hover:bg-accent text-accent hover:text-white font-mono text-xs font-semibold transition-all shadow-sm"
+            >
+              <FileText size={14} />
+              <span>View Resume (PDF)</span>
+            </button>
+            <a
+              href={profile.resumeUrl}
+              onClick={downloadResume}
+              download="Aryan-Rathod-Resume.pdf"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-line hover:border-ink bg-white text-ink_text font-mono text-xs font-medium transition-all cursor-pointer"
+            >
+              <Download size={14} />
+              <span>Download</span>
+            </a>
+          </div>
         </div>
+
+        {/* 6-Grid Recruiter Highlights */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {recruiterHighlights.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="group relative bg-gradient-to-br from-white to-paper/60 border border-line rounded-2xl p-6 hover:border-accent/40 transition-all hover:shadow-xl"
+            >
+              {/* Subtle top indicator */}
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-2xl">{item.icon}</span>
+                <span className="font-mono text-[11px] text-accent bg-accent-soft border border-accent/20 px-2.5 py-0.5 rounded-full font-semibold">
+                  {item.tag}
+                </span>
+              </div>
+
+              {/* Metric & Title */}
+              <div className="text-2xl font-bold text-ink_text mb-1 flex items-center gap-2">
+                {item.metric}
+                {item.title === 'Immediate Availability' && (
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+                  </span>
+                )}
+              </div>
+              <h3 className="font-semibold text-ink_text text-base mb-2 group-hover:text-accent transition-colors">
+                {item.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-sm text-text-soft leading-relaxed">{item.description}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bottom Banner with Live GitHub and SPPU Details */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-10 p-5 rounded-2xl bg-paper-soft/70 border border-line flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-xs text-text-soft"
+        >
+          <div className="flex items-center gap-2">
+            <CheckCircle size={16} className="text-accent shrink-0" />
+            <span>
+              <strong className="text-ink_text font-semibold">Education &amp; Availability:</strong> B.E. in AI &amp; ML (SPPU, 2021–2025) · 7.24/10 CGPA · Ready to join immediately.
+            </span>
+          </div>
+          <div className="flex items-center gap-4 shrink-0">
+            <span>
+              GitHub Repos: <strong className="text-ink_text">{repoCount}</strong>
+            </span>
+            <span>
+              Location: <strong className="text-ink_text">Pune, MH</strong>
+            </span>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -10,31 +10,37 @@ import EducationNew from './components/EducationNew'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import CommandPalette from './components/CommandPalette'
+import ResumeModal from './components/ResumeModal'
 import { useKeyboardShortcut } from './hooks/useKeyboardShortcut'
 
 export default function App() {
   const [paletteOpen, setPaletteOpen] = useState(false)
+  const [resumeOpen, setResumeOpen] = useState(false)
 
   const openPalette = useCallback(() => setPaletteOpen(true), [])
   const closePalette = useCallback(() => setPaletteOpen(false), [])
+
+  const openResume = useCallback(() => setResumeOpen(true), [])
+  const closeResume = useCallback(() => setResumeOpen(false), [])
 
   useKeyboardShortcut('k', openPalette)
 
   return (
     <>
-      <Nav onOpenPalette={openPalette} />
+      <Nav onOpenPalette={openPalette} onOpenResume={openResume} />
       <main>
-        <PremiumHero />
-        <QuickWins />
-        <PremiumAbout />
+        <PremiumHero onOpenResume={openResume} />
+        <QuickWins onOpenResume={openResume} />
+        <PremiumAbout onOpenResume={openResume} />
         <PremiumTechStack />
         <PremiumProjects />
-        <PremiumExperience />
-        <EducationNew />
-        <Contact />
+        <PremiumExperience onOpenResume={openResume} />
+        <EducationNew onOpenResume={openResume} />
+        <Contact onOpenResume={openResume} />
       </main>
-      <Footer />
-      <CommandPalette open={paletteOpen} onClose={closePalette} />
+      <Footer onOpenResume={openResume} />
+      <CommandPalette open={paletteOpen} onClose={closePalette} onOpenResume={openResume} />
+      <ResumeModal open={resumeOpen} onClose={closeResume} />
     </>
   )
 }
