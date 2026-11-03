@@ -27,51 +27,53 @@ export default function Contact({ onOpenResume }) {
   }
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-gradient-to-b from-white to-paper-soft border-b border-line">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="contact" className="py-14 sm:py-20 md:py-28 bg-gradient-to-b from-white to-paper-soft border-b border-line">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-14"
+          className="mb-10 sm:mb-14"
         >
           <div className="inline-block font-mono text-xs text-accent bg-accent-soft border border-accent/25 px-3 py-1.5 rounded-full mb-4">
             // Get In Touch
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-ink_text tracking-tight mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-ink_text tracking-tight mb-2 sm:mb-3">
             Let&apos;s Build Something Impactful
           </h2>
-          <p className="text-lg text-text-soft max-w-2xl">
+          <p className="text-sm sm:text-base md:text-lg text-text-soft max-w-2xl">
             Currently open to full-time Python Full Stack, Backend Developer, and Software Engineer opportunities. Available immediately.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-12 gap-8 items-start">
+        <div className="grid md:grid-cols-12 gap-6 sm:gap-8 items-start">
           {/* Left Column: Direct Recruiter Actions (5 cols) */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="md:col-span-5 space-y-4"
+            className="md:col-span-5 space-y-3.5 sm:space-y-4"
           >
             {/* 1-Click Copy Email Card */}
             <motion.button
               onClick={copyEmail}
-              className="w-full flex items-center justify-between p-4 rounded-2xl border border-line hover:border-accent/50 bg-white hover:bg-accent/[0.02] transition-all text-left group shadow-xs cursor-pointer"
+              className="w-full flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border border-line hover:border-accent/50 bg-white hover:bg-accent/[0.02] transition-all text-left group shadow-xs cursor-pointer gap-2"
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
             >
-              <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-xl bg-accent-soft text-accent flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <Mail size={20} />
+              <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-accent-soft text-accent flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <Mail size={18} />
                 </div>
-                <div>
-                  <div className="font-mono text-xs text-text-soft">Direct Email</div>
-                  <div className="font-bold text-ink_text text-sm md:text-base">{profile.email}</div>
+                <div className="min-w-0">
+                  <div className="font-mono text-[11px] sm:text-xs text-text-soft">Direct Email</div>
+                  <div className="font-bold text-ink_text text-xs sm:text-sm md:text-base break-all">
+                    {profile.email}
+                  </div>
                 </div>
               </div>
-              <span className="font-mono text-xs px-2.5 py-1 rounded-md bg-paper-soft text-text-soft group-hover:text-accent font-semibold transition-colors">
+              <span className="font-mono text-[11px] sm:text-xs px-2 sm:px-2.5 py-1 rounded-md bg-paper-soft text-text-soft group-hover:text-accent font-semibold transition-colors shrink-0">
                 {copied ? 'Copied! ✓' : 'Copy'}
               </span>
             </motion.button>
@@ -79,20 +81,20 @@ export default function Contact({ onOpenResume }) {
             {/* Direct Phone Call Card */}
             <motion.a
               href={`tel:${profile.phone}`}
-              className="w-full flex items-center justify-between p-4 rounded-2xl border border-line hover:border-accent/50 bg-white hover:bg-accent/[0.02] transition-all group shadow-xs"
+              className="w-full flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border border-line hover:border-accent/50 bg-white hover:bg-accent/[0.02] transition-all group shadow-xs gap-2"
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
             >
-              <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-xl bg-accent2-soft text-accent2 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <Phone size={20} />
+              <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-accent2-soft text-accent2 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <Phone size={18} />
                 </div>
-                <div>
-                  <div className="font-mono text-xs text-text-soft">Direct Phone</div>
-                  <div className="font-bold text-ink_text text-sm md:text-base">{profile.phone}</div>
+                <div className="min-w-0">
+                  <div className="font-mono text-[11px] sm:text-xs text-text-soft">Direct Phone</div>
+                  <div className="font-bold text-ink_text text-xs sm:text-sm md:text-base">{profile.phone}</div>
                 </div>
               </div>
-              <span className="font-mono text-xs px-2.5 py-1 rounded-md bg-paper-soft text-text-soft group-hover:text-accent font-semibold transition-colors">
+              <span className="font-mono text-[11px] sm:text-xs px-2 sm:px-2.5 py-1 rounded-md bg-paper-soft text-text-soft group-hover:text-accent font-semibold transition-colors shrink-0">
                 Call
               </span>
             </motion.a>
@@ -102,26 +104,26 @@ export default function Contact({ onOpenResume }) {
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-between p-4 rounded-2xl border border-line hover:border-accent/50 bg-white hover:bg-accent/[0.02] transition-all group shadow-xs"
+              className="w-full flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border border-line hover:border-accent/50 bg-white hover:bg-accent/[0.02] transition-all group shadow-xs gap-2"
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
             >
-              <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-xl bg-[#0A66C2]/10 text-[#0A66C2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <Linkedin size={20} />
+              <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#0A66C2]/10 text-[#0A66C2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <Linkedin size={18} />
                 </div>
-                <div>
-                  <div className="font-mono text-xs text-text-soft">LinkedIn Network</div>
-                  <div className="font-bold text-ink_text text-sm md:text-base">aryan-rathod054</div>
+                <div className="min-w-0">
+                  <div className="font-mono text-[11px] sm:text-xs text-text-soft">LinkedIn Network</div>
+                  <div className="font-bold text-ink_text text-xs sm:text-sm md:text-base">aryan-rathod054</div>
                 </div>
               </div>
-              <span className="font-mono text-xs px-2.5 py-1 rounded-md bg-paper-soft text-text-soft group-hover:text-accent font-semibold transition-colors">
+              <span className="font-mono text-[11px] sm:text-xs px-2 sm:px-2.5 py-1 rounded-md bg-paper-soft text-text-soft group-hover:text-accent font-semibold transition-colors shrink-0">
                 Connect
               </span>
             </motion.a>
 
             {/* Resume Buttons Box */}
-            <div className="p-5 rounded-2xl bg-gradient-to-br from-ink to-ink-soft text-white space-y-3 shadow-lg">
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-ink to-ink-soft text-white space-y-3 shadow-lg">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="font-bold text-sm">Official Resume</div>
@@ -153,13 +155,13 @@ export default function Contact({ onOpenResume }) {
             </div>
 
             {/* Quick Status Note */}
-            <div className="p-4 rounded-xl bg-paper border border-line text-xs font-mono text-text-soft space-y-1">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-paper border border-line text-xs font-mono text-text-soft space-y-1">
               <div className="flex items-center gap-2 text-ink_text font-semibold">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Notice Period: Immediate (0 Days)</span>
               </div>
               <div className="flex items-center gap-1 text-text-soft">
-                <MapPin size={12} />
+                <MapPin size={12} className="shrink-0" />
                 <span>Current Location: Pune, Maharashtra, India</span>
               </div>
             </div>
@@ -170,16 +172,16 @@ export default function Contact({ onOpenResume }) {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="md:col-span-7 bg-white border border-line rounded-2xl p-7 md:p-8 shadow-sm"
+            className="md:col-span-7 bg-white border border-line rounded-2xl p-5 sm:p-7 md:p-8 shadow-sm"
           >
-            <h3 className="text-xl font-bold text-ink_text mb-2">Send a Direct Message</h3>
-            <p className="text-sm text-text-soft mb-6">
+            <h3 className="text-lg sm:text-xl font-bold text-ink_text mb-2">Send a Direct Message</h3>
+            <p className="text-xs sm:text-sm text-text-soft mb-5 sm:mb-6">
               Recruiters and hiring managers: reach out with open roles, project collaborations, or interview invitations.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
               <div>
-                <label className="block font-mono text-xs text-text-soft uppercase tracking-wider mb-2 font-semibold">
+                <label className="block font-mono text-xs text-text-soft uppercase tracking-wider mb-1.5 sm:mb-2 font-semibold">
                   Your Name / Recruiter Name
                 </label>
                 <input
@@ -188,12 +190,12 @@ export default function Contact({ onOpenResume }) {
                   value={form.name}
                   onChange={update('name')}
                   placeholder="e.g. Alex Johnson (Tech Recruiter)"
-                  className="w-full text-sm px-4 py-3 border border-line rounded-xl bg-paper/30 focus:bg-white focus:border-accent focus:outline-none transition-all"
+                  className="w-full text-sm px-3.5 sm:px-4 py-2.5 sm:py-3 border border-line rounded-xl bg-paper/30 focus:bg-white focus:border-accent focus:outline-none transition-all"
                 />
               </div>
 
               <div>
-                <label className="block font-mono text-xs text-text-soft uppercase tracking-wider mb-2 font-semibold">
+                <label className="block font-mono text-xs text-text-soft uppercase tracking-wider mb-1.5 sm:mb-2 font-semibold">
                   Work Email Address
                 </label>
                 <input
@@ -202,12 +204,12 @@ export default function Contact({ onOpenResume }) {
                   value={form.email}
                   onChange={update('email')}
                   placeholder="alex@company.com"
-                  className="w-full text-sm px-4 py-3 border border-line rounded-xl bg-paper/30 focus:bg-white focus:border-accent focus:outline-none transition-all"
+                  className="w-full text-sm px-3.5 sm:px-4 py-2.5 sm:py-3 border border-line rounded-xl bg-paper/30 focus:bg-white focus:border-accent focus:outline-none transition-all"
                 />
               </div>
 
               <div>
-                <label className="block font-mono text-xs text-text-soft uppercase tracking-wider mb-2 font-semibold">
+                <label className="block font-mono text-xs text-text-soft uppercase tracking-wider mb-1.5 sm:mb-2 font-semibold">
                   Message / Role Overview
                 </label>
                 <textarea
@@ -216,13 +218,13 @@ export default function Contact({ onOpenResume }) {
                   value={form.message}
                   onChange={update('message')}
                   placeholder="Hi Aryan, we are hiring for a Python Full Stack / Backend Engineer role and were impressed by your SMART360 and DRF experience..."
-                  className="w-full text-sm px-4 py-3 border border-line rounded-xl bg-paper/30 focus:bg-white focus:border-accent focus:outline-none resize-y transition-all"
+                  className="w-full text-sm px-3.5 sm:px-4 py-2.5 sm:py-3 border border-line rounded-xl bg-paper/30 focus:bg-white focus:border-accent focus:outline-none resize-y transition-all"
                 />
               </div>
 
               <motion.button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-white font-semibold shadow-md hover:bg-accent/90 transition-all cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 sm:py-3.5 rounded-xl bg-accent text-white font-semibold shadow-md hover:bg-accent/90 transition-all cursor-pointer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >

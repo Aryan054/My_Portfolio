@@ -55,42 +55,42 @@ export default function PremiumTechStack() {
   }
 
   return (
-    <section id="skills" className="py-20 md:py-28 bg-white border-b border-line">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="skills" className="py-14 sm:py-20 md:py-28 bg-white border-b border-line">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-10 sm:mb-12"
         >
           <div className="inline-block font-mono text-xs text-accent bg-accent-soft border border-accent/25 px-3 py-1.5 rounded-full mb-4">
             // Technical Skills &amp; Stack
           </div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
             <div>
-              <h2 className="text-3xl md:text-5xl font-bold text-ink_text tracking-tight mb-3">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-ink_text tracking-tight mb-2 sm:mb-3">
                 Expertise &amp; Production Stack
               </h2>
-              <p className="text-lg text-text-soft max-w-2xl">
+              <p className="text-sm sm:text-base md:text-lg text-text-soft max-w-2xl">
                 Comprehensive technical skills based on live production work, university training in AI/ML, and certified programs.
               </p>
             </div>
-            <div className="font-mono text-xs text-text-soft bg-paper-soft px-3.5 py-2 rounded-xl border border-line shrink-0">
+            <div className="font-mono text-xs text-text-soft bg-paper-soft px-3.5 py-2 rounded-xl border border-line shrink-0 w-fit">
               <span className="font-bold text-ink_text">{totalSkillsCount}</span> Technologies &amp; Frameworks
             </div>
           </div>
         </motion.div>
 
         {/* Filter Controls & Search Bar */}
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-10">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-8 sm:mb-10">
           {/* Category Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+          <div className="-mx-4 px-4 sm:mx-0 sm:px-0 flex items-center gap-1.5 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
-                className={`font-mono text-xs px-3.5 py-2 rounded-xl transition-all whitespace-nowrap cursor-pointer ${
+                className={`font-mono text-xs px-3 sm:px-3.5 py-2 rounded-xl transition-all whitespace-nowrap cursor-pointer shrink-0 ${
                   activeTab === cat.id
                     ? 'bg-ink text-white font-semibold shadow-sm'
                     : 'bg-paper text-text-soft hover:text-ink_text hover:bg-paper-soft border border-line'
@@ -102,19 +102,19 @@ export default function PremiumTechStack() {
           </div>
 
           {/* Interactive Search for Recruiters */}
-          <div className="relative min-w-[260px]">
+          <div className="relative w-full lg:w-72 shrink-0">
             <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search skill (e.g. FastAPI, pgvector, Docker)..."
+              placeholder="Search skill (FastAPI, pgvector)..."
               className="w-full pl-9 pr-4 py-2 text-xs font-mono bg-paper border border-line rounded-xl text-ink_text placeholder:text-muted focus:border-accent focus:bg-white focus:outline-none transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink_text text-xs"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink_text text-xs cursor-pointer"
               >
                 ✕
               </button>
@@ -124,7 +124,7 @@ export default function PremiumTechStack() {
 
         {/* Categorized View (when all is selected and no search) OR Filtered Grid */}
         {activeTab === 'all' && !searchQuery ? (
-          <div className="space-y-10">
+          <div className="space-y-6 sm:space-y-10">
             {Object.entries(technicalSkills).map(([catKey, catData], catIdx) => (
               <motion.div
                 key={catKey}
@@ -132,31 +132,31 @@ export default function PremiumTechStack() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: catIdx * 0.05 }}
-                className="p-6 md:p-7 rounded-2xl bg-paper/50 border border-line hover:border-line-dark/30 transition-all"
+                className="p-4 sm:p-6 md:p-7 rounded-2xl bg-paper/50 border border-line hover:border-line-dark/30 transition-all"
               >
-                <div className="flex items-center justify-between gap-4 mb-5 pb-3 border-b border-line">
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-xl">{catData.icon}</span>
-                    <h3 className="font-bold text-lg text-ink_text">{catData.category}</h3>
+                <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-5 pb-3 border-b border-line">
+                  <div className="flex items-center gap-2 sm:gap-2.5">
+                    <span className="text-lg sm:text-xl">{catData.icon}</span>
+                    <h3 className="font-bold text-base sm:text-lg text-ink_text">{catData.category}</h3>
                   </div>
                   <span className="text-xs font-mono text-text-soft hidden sm:inline">
                     {catData.description}
                   </span>
                 </div>
 
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2 sm:gap-2.5">
                   {catData.skills.map((skill, sIdx) => (
                     <motion.div
                       key={sIdx}
-                      whileHover={{ scale: 1.04, y: -1 }}
-                      className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-line shadow-2xs hover:border-accent/50 hover:shadow-sm transition-all ${
+                      whileHover={{ scale: 1.03, y: -1 }}
+                      className={`inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-white border border-line shadow-2xs hover:border-accent/50 hover:shadow-sm transition-all ${
                         skill.hot ? 'border-accent/40 bg-accent/[0.02]' : ''
                       }`}
                     >
                       {skill.hot && <Flame size={13} className="text-accent shrink-0" />}
                       <span className="font-semibold text-xs text-ink_text">{skill.name}</span>
                       <span
-                        className={`font-mono text-[10px] px-2 py-0.5 rounded-full border ${
+                        className={`font-mono text-[9.5px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full border ${
                           levelColors[skill.level] || 'bg-paper-soft text-text-soft border-line'
                         }`}
                       >
@@ -171,11 +171,11 @@ export default function PremiumTechStack() {
         ) : (
           <div>
             {filteredSkills.length === 0 ? (
-              <div className="p-12 text-center text-text-soft font-mono text-sm bg-paper rounded-2xl border border-line">
+              <div className="p-8 sm:p-12 text-center text-text-soft font-mono text-sm bg-paper rounded-2xl border border-line">
                 No matching technologies found for &quot;{searchQuery}&quot;.
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
                 <AnimatePresence>
                   {filteredSkills.map((skill, idx) => (
                     <motion.div
@@ -185,7 +185,7 @@ export default function PremiumTechStack() {
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.15 }}
                       whileHover={{ scale: 1.03, y: -2 }}
-                      className={`p-4 rounded-xl bg-white border border-line hover:border-accent/50 hover:shadow-md transition-all flex flex-col justify-between ${
+                      className={`p-3.5 sm:p-4 rounded-xl bg-white border border-line hover:border-accent/50 hover:shadow-md transition-all flex flex-col justify-between ${
                         skill.hot ? 'border-accent/40 bg-accent/[0.01]' : ''
                       }`}
                     >
@@ -212,8 +212,8 @@ export default function PremiumTechStack() {
         )}
 
         {/* Legend */}
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-line text-xs font-mono text-text-soft">
-          <div className="flex items-center gap-4 flex-wrap">
+        <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pt-6 border-t border-line text-xs font-mono text-text-soft">
+          <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
             <span className="flex items-center gap-1.5">
               <Flame size={13} className="text-accent" />
               <span>Core / High Proficiency</span>

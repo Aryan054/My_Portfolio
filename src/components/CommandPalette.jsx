@@ -90,7 +90,7 @@ export default function CommandPalette({ open, onClose, onOpenResume }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[300] bg-ink/70 backdrop-blur-sm flex items-start justify-center pt-20 px-4"
+          className="fixed inset-0 z-[300] bg-ink/70 backdrop-blur-sm flex items-start justify-center pt-10 sm:pt-20 px-3 sm:px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -107,22 +107,22 @@ export default function CommandPalette({ open, onClose, onOpenResume }) {
             onClick={(e) => e.stopPropagation()}
             className="w-full max-w-lg bg-ink border border-line-dark rounded-2xl shadow-2xl overflow-hidden"
           >
-            <div className="flex items-center gap-3 px-4 py-3.5 border-b border-line-dark">
+            <div className="flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-3 sm:py-3.5 border-b border-line-dark">
               <Search size={16} className="text-muted shrink-0" />
               <input
                 ref={inputRef}
                 value={state.query}
                 onChange={(e) => dispatch({ type: 'SET_QUERY', payload: e.target.value })}
                 onKeyDown={handleKeyDown}
-                placeholder="Type a command (e.g. resume, skills, contact)..."
-                className="w-full bg-transparent font-mono text-sm text-white placeholder:text-muted outline-none"
+                placeholder="Type a command (resume, skills)..."
+                className="w-full bg-transparent font-mono text-xs sm:text-sm text-white placeholder:text-muted outline-none"
               />
               <kbd className="font-mono text-[10px] text-muted border border-line-dark rounded px-1.5 py-0.5 shrink-0">
                 esc
               </kbd>
             </div>
 
-            <ul className="max-h-72 overflow-y-auto py-1.5">
+            <ul className="max-h-[55vh] sm:max-h-72 overflow-y-auto py-1.5">
               {filtered.length === 0 && (
                 <li className="px-4 py-6 text-center text-muted font-mono text-xs">No matching commands</li>
               )}
@@ -131,21 +131,21 @@ export default function CommandPalette({ open, onClose, onOpenResume }) {
                   <button
                     onClick={() => runCommand(cmd)}
                     onMouseEnter={() => dispatch({ type: 'MOVE', payload: i })}
-                    className={`w-full flex items-center justify-between gap-3 px-4 py-2.5 text-left font-mono text-[13px] ${
+                    className={`w-full flex items-center justify-between gap-2 sm:gap-3 px-3.5 sm:px-4 py-2.5 text-left font-mono text-xs sm:text-[13px] ${
                       i === state.selected ? 'bg-ink-soft text-white' : 'text-[#D6DCE5]'
                     }`}
                   >
-                    <span className="flex items-center gap-2">
-                      {cmd.id.includes('resume') && <FileText size={13} className="text-accent" />}
-                      {cmd.label}
+                    <span className="flex items-center gap-2 truncate">
+                      {cmd.id.includes('resume') && <FileText size={13} className="text-accent shrink-0" />}
+                      <span className="truncate">{cmd.label}</span>
                     </span>
-                    <span className="text-muted text-[11px]">{cmd.hint}</span>
+                    <span className="text-muted text-[10.5px] sm:text-[11px] shrink-0">{cmd.hint}</span>
                   </button>
                 </li>
               ))}
             </ul>
 
-            <div className="flex items-center gap-4 px-4 py-2.5 border-t border-line-dark text-muted font-mono text-[10.5px]">
+            <div className="flex items-center gap-3 sm:gap-4 px-3.5 sm:px-4 py-2 sm:py-2.5 border-t border-line-dark text-muted font-mono text-[10px] sm:text-[10.5px]">
               <span className="flex items-center gap-1">
                 <ArrowUp size={11} /> <ArrowDown size={11} /> navigate
               </span>

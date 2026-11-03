@@ -15,9 +15,9 @@ export default function Footer({ onOpenResume }) {
   }
 
   return (
-    <footer className="py-10 bg-ink text-muted border-t border-line-dark">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-line-dark/60">
+    <footer className="py-8 sm:py-10 bg-ink text-muted border-t border-line-dark">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6 pb-6 border-b border-line-dark/60">
           <div>
             <div className="font-bold text-white text-base tracking-tight">
               Aryan Rathod
@@ -28,10 +28,10 @@ export default function Footer({ onOpenResume }) {
           </div>
 
           {/* Quick Links */}
-          <div className="flex items-center gap-4 text-xs font-mono">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-mono">
             <button
               onClick={onOpenResume}
-              className="text-accent hover:text-white flex items-center gap-1.5 transition-colors"
+              className="text-accent hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <FileText size={13} />
               <span>Resume PDF</span>
@@ -40,7 +40,7 @@ export default function Footer({ onOpenResume }) {
               href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white flex items-center gap-1 transition-colors"
+              className="hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
             >
               <Github size={13} />
               <span>GitHub</span>
@@ -49,14 +49,14 @@ export default function Footer({ onOpenResume }) {
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white flex items-center gap-1 transition-colors"
+              className="hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
             >
               <Linkedin size={13} />
               <span>LinkedIn</span>
             </a>
             <a
               href={`mailto:${profile.email}`}
-              className="hover:text-white flex items-center gap-1 transition-colors"
+              className="hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
             >
               <Mail size={13} />
               <span>Email</span>
@@ -64,19 +64,20 @@ export default function Footer({ onOpenResume }) {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-6 font-mono text-[11.5px]">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pt-6 font-mono text-[11px] sm:text-[11.5px]">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <span>© 2026 Aryan Rathod · Pune, Maharashtra, IN</span>
             <span className="hidden sm:inline">•</span>
-            <span className="text-emerald-400 hidden sm:inline">Immediate Availability</span>
+            <span className="text-emerald-400">Immediate Availability</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-4">
             <span className="text-muted/80">x-response-time: {ms.toFixed(1)}ms</span>
             <button
               onClick={scrollToTop}
-              className="p-1.5 rounded-lg border border-line-dark hover:border-accent text-muted hover:text-white transition-colors"
+              className="p-1.5 rounded-lg border border-line-dark hover:border-accent text-muted hover:text-white transition-colors cursor-pointer"
               title="Scroll to top"
+              aria-label="Scroll to top"
             >
               <ArrowUp size={13} />
             </button>

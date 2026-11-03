@@ -28,7 +28,7 @@ export default function App() {
   return (
     <>
       <Nav onOpenPalette={openPalette} onOpenResume={openResume} />
-      <main>
+      <main className="w-full overflow-x-clip">
         <PremiumHero onOpenResume={openResume} />
         <QuickWins onOpenResume={openResume} />
         <PremiumAbout onOpenResume={openResume} />
